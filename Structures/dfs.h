@@ -51,9 +51,9 @@ struct Graph {
             if (colors[v] == WHITE) {
                 dfs_visit(v, colors);
             }
-
-            colors[u] = BLACK;
         }
+
+        colors[u] = BLACK;
     }
 };
 
