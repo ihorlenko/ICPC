@@ -29,30 +29,32 @@ struct Graph {
         }
     }
 
-
-    void dfs(int start) {
+    void dfs() {
         vector<Color> colors(list.size());
-        for (int i = 0; i < colors.size(); ++i) {
+        for (int i = 1; i < colors.size(); ++i) {
             colors[i] = WHITE;
         }
 
-        stack<int> S;
-        colors[start] = GRAY;
-        S.push(start);
-
-        while (!S.empty()) {
-            int u = S.top();
-            S.pop();
-
-            for (int i = 0; i < list[u].size(); ++i) {
-                int v = list[u][i];
-                if (colors[v] == WHITE) {
-                    colors[v] = GRAY;
-                    S.push(v);
-                }
+        for (int i = 1; i < list.size(); ++i) {
+            if (colors[i] == WHITE) {
+                dfs_visit(i, colors);
             }
+        }
+    }
+
+    void dfs_visit(int u, vector<Color>& colors) {
+        colors[u] = GRAY;
+
+        for (int i = 0; i < list[u].size(); ++i) {
+            int v = list[u][i];
+
+            if (colors[v] == WHITE) {
+                dfs_visit(v, colors);
+            }
+
             colors[u] = BLACK;
         }
     }
 };
+
 #endif //ICPC_DFS_H
