@@ -2,7 +2,6 @@
 #include <climits>
 #include <vector>
 #include <sstream>
-#include <queue>
 
 using namespace std;
 
@@ -27,9 +26,9 @@ struct Graph {
 
     void addEdge(int x, int y, bool directed);
 
-    void dfs(int start, int& total_cost);
+    void dfs(int start, long long& total_cost);
 
-    void dfs_visit(int u, int& total_cost);
+    void dfs_visit(int u, long long& total_cost);
 };
 
 void Graph::addEdge(int x, int y, bool directed) {
@@ -40,12 +39,12 @@ void Graph::addEdge(int x, int y, bool directed) {
     }
 }
 
-void Graph::dfs(int start, int& total_cost) {
+void Graph::dfs(int start, long long& total_cost) {
     colors.assign(V, WHITE);
     dfs_visit(start, total_cost);
 }
 
-void Graph::dfs_visit(int u, int& total_cost) {
+void Graph::dfs_visit(int u, long long& total_cost) {
     colors[u] = GRAY;
 
     for (int v : adj[u]) {
@@ -81,7 +80,7 @@ int main() {
         }
     }
 
-    int total_cost = 0;
+    long long total_cost = 0;
     g.dfs(1, total_cost);
 
     cout << total_cost;
