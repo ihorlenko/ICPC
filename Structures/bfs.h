@@ -14,14 +14,14 @@ enum Color {
 };
 
 struct Graph {
-    vector<vector<int>> list;
+    vector<vector<int>> adj;
 
     Graph(int n) {
-        list.resize(n + 1);
+        adj.resize(n + 1);
     }
 
     void add_edge(int x, int y, bool directed) {
-        list[x].push_back(y);
+        adj[x].push_back(y);
 
         if (!directed) {
             add_edge(y, x, true);
@@ -29,7 +29,7 @@ struct Graph {
     }
 
     void bfs(int start) {
-        vector<Color> colors(list.size());
+        vector<Color> colors(adj.size());
         for (int i = 0; i < colors.size(); ++i) {
             colors[i] = WHITE;
         }
@@ -41,8 +41,8 @@ struct Graph {
         while (!q.empty()) {
             int u = q.front();
             q.pop();
-            for (int i = 0; i < list[u].size(); ++i) {
-                int v = list[u][i];
+            for (int i = 0; i < adj[u].size(); ++i) {
+                int v = adj[u][i];
                 if (colors[v] == WHITE) {
                     colors[v] = GRAY;
                     q.push(v);
