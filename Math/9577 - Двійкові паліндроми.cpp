@@ -23,6 +23,8 @@ int main() {
         if (bin_str[i] == '0') {
             zeroBitPairs.push(i);
             if (bin_str[pair] == '1') zeroizationIsNeeded = true;
+        } else if (bin_str[i] == '1' && bin_str[pair] == '0') {
+            zeroizationIsNeeded = false;
         }
     }
     if (zeroBitPairs.empty()) {
@@ -31,10 +33,8 @@ int main() {
         }
     } else if (zeroizationIsNeeded) {
         int lastIndex = zeroBitPairs.top();
-        if (bin_str[length - lastIndex - 1] != '0')  {
-            bin_str[lastIndex] = '1';
-            bin_str[length - lastIndex - 1] = '1';
-        }
+        bin_str[lastIndex] = '1';
+        bin_str[length - lastIndex - 1] = '1';
         for (int i = 0; i < lastIndex; ++i) {
             int pair = length - i - 1;
             bin_str[pair] = bin_str[i];
@@ -47,14 +47,9 @@ int main() {
     } else {
         for (int i = 0; i < (length / 2 + length % 2); ++i) {
             int pair = length - i - 1;
-            if (bin_str[i] == '1') bin_str[pair] = '1';
+            bin_str[pair] = bin_str[i];
         }
     }
 
-    cout << bitset<16>(n) << " " << bitset<16>(1057) << " " << bitset<16>(1025) << endl;
     cout << bitset<64>(bin_str).to_ullong();
 }
-
-// 1034
-// 134234
-// 12718763
